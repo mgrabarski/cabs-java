@@ -1,10 +1,16 @@
 package io.legacyfighter.cabs.service;
 
-class DriverLicence {
+import javax.persistence.Embeddable;
+
+@Embeddable
+public class DriverLicence {
+
+    public DriverLicence() {
+    }
 
     private static final String DRIVER_LICENSE_REGEX = "^[A-Z9]{5}\\d{6}[A-Z9]{2}\\d[A-Z]{2}$";
 
-    private final String driverLicence;
+    private String driverLicence;
 
     private DriverLicence(String driverLicence) {
         this.driverLicence = driverLicence;
@@ -25,7 +31,3 @@ class DriverLicence {
         return driverLicence;
     }
 }
-
-// utworzenie kierowcy
-// zmiana jego numberu prawa jazdy
-// zmiana statusu kierowcy
