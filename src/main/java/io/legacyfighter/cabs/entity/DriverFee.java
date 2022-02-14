@@ -1,6 +1,7 @@
 package io.legacyfighter.cabs.entity;
 
 import io.legacyfighter.cabs.common.BaseEntity;
+import io.legacyfighter.cabs.money.Money;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -51,20 +52,22 @@ public class DriverFee extends BaseEntity {
         this.driver = driver;
     }
 
-    public Integer getAmount() {
-        return amount;
-    }
-
     public void setAmount(Integer amount) {
         this.amount = amount;
     }
 
-    public Integer getMin() {
-        return min;
-    }
-
     public void setMin(Integer min) {
         this.min = min;
+    }
+
+    public int calculateDriverFee(Money transitPrice) {
+        Money finalFee;
+        if (feeType.equals(FeeType.FLAT)) {
+            finalFee = transitPrice.subtract(new Money(amount));
+        } else {
+            finalFee = transitPrice.percentage(amount);
+        }
+        return Math.max(finalFee.toInt(), min == null ? 0 : min);
     }
 
     @Override
