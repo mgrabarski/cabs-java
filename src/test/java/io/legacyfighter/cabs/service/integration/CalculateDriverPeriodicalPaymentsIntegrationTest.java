@@ -3,6 +3,7 @@ package io.legacyfighter.cabs.service.integration;
 import io.legacyfighter.cabs.entity.Driver;
 import io.legacyfighter.cabs.entity.DriverFee;
 import io.legacyfighter.cabs.entity.Transit;
+import io.legacyfighter.cabs.money.Money;
 import io.legacyfighter.cabs.repository.AddressRepository;
 import io.legacyfighter.cabs.repository.ClientRepository;
 import io.legacyfighter.cabs.repository.DriverFeeRepository;
@@ -101,7 +102,7 @@ class CalculateDriverPeriodicalPaymentsIntegrationTest {
 
     public Transit aTransit(Driver driver, Integer price, LocalDateTime when) {
         Transit transit = new Transit();
-        transit.setPrice(price);
+        transit.setPrice(new Money(price));
         transit.setDriver(driver);
         transit.setDateTime(when.toInstant(ZoneOffset.UTC));
         return transitRepository.save(transit);

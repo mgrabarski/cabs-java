@@ -1,8 +1,8 @@
 package io.legacyfighter.cabs.entity;
 
+import io.legacyfighter.cabs.money.Money;
 import org.junit.jupiter.api.Test;
 
-import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneOffset;
 
@@ -35,9 +35,9 @@ class CalculateTransitPriceTest {
         transit.setStatus(Transit.Status.COMPLETED);
         transit.setDateTime(LocalDate.of(2022, 2, 14).atStartOfDay().toInstant(ZoneOffset.UTC));
 
-        Integer result = transit.calculateFinalCosts();
+        Money result = transit.calculateFinalCosts();
 
-        assertThat(result).isEqualTo(900);
+        assertThat(result).isEqualTo(new Money(900));
     }
 
     @Test
@@ -46,9 +46,9 @@ class CalculateTransitPriceTest {
         transit.setStatus(Transit.Status.COMPLETED);
         transit.setDateTime(LocalDate.of(2022, 2, 13).atStartOfDay().toInstant(ZoneOffset.UTC));
 
-        Integer result = transit.calculateFinalCosts();
+        Money result = transit.calculateFinalCosts();
 
-        assertThat(result).isEqualTo(1000);
+        assertThat(result).isEqualTo(new Money(1000));
     }
 
     @Test

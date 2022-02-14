@@ -1,11 +1,17 @@
 package io.legacyfighter.cabs.money;
 
+import javax.persistence.Embeddable;
 import java.util.Locale;
 import java.util.Objects;
 
+@Embeddable
 public class Money {
 
     private Integer value;
+
+    public Money() {
+
+    }
 
     public Money(Integer value) {
         this.value = value;
@@ -20,7 +26,7 @@ public class Money {
     }
 
     public Money percentage(int percentage) {
-        return new Money((int) Math.round(percentage * value/100.0));
+        return new Money((int) Math.round(percentage * value / 100.0));
     }
 
     public Integer toInt() {
